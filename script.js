@@ -1,6 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     const letterContainer = document.getElementById('letterContainer');
+    const music = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
     let isOpened = false;
+    let isMusicPlaying = false;
+
+    // Function to start music
+    function startMusic() {
+        music.play().then(() => {
+            isMusicPlaying = true;
+            musicToggle.classList.add('playing');
+        }).catch(err => {
+            console.log("Playback failed:", err);
+        });
+    }
+
+    // Try to play music on any user interaction with the page
+    document.body.addEventListener('click', function() {
+        if (!isMusicPlaying) {
+            startMusic();
+        }
+    }, { once: true });
 
     // Create sparkle effect
     function createSparkle() {
@@ -15,20 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add periodic sparkles
     setInterval(createSparkle, 500);
 
-    // Add music control
-    const music = document.getElementById('backgroundMusic');
-    const musicToggle = document.getElementById('musicToggle');
-    let isMusicPlaying = true;
-
-    // Auto-play music when page loads
-    music.play();
-    musicToggle.classList.add('playing');
-
     musicToggle.addEventListener('click', () => {
         if (!isMusicPlaying) {
-            music.play();
-            musicToggle.classList.add('playing');
-            isMusicPlaying = true;
+            startMusic();
         } else {
             music.pause();
             musicToggle.classList.remove('playing');
@@ -40,6 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isOpened) {
             letterContainer.classList.add('opened');
             isOpened = true;
+            
+            // Try to start music if not already playing
+            if (!isMusicPlaying) {
+                startMusic();
+            }
             
             setTimeout(() => {
                 createFloatingHearts();
