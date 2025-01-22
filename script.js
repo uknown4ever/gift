@@ -15,12 +15,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add periodic sparkles
     setInterval(createSparkle, 500);
 
+    // Add music control
+    const music = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isMusicPlaying = true;
+
+    // Auto-play music when page loads
+    music.play();
+    musicToggle.classList.add('playing');
+
+    musicToggle.addEventListener('click', () => {
+        if (!isMusicPlaying) {
+            music.play();
+            musicToggle.classList.add('playing');
+            isMusicPlaying = true;
+        } else {
+            music.pause();
+            musicToggle.classList.remove('playing');
+            isMusicPlaying = false;
+        }
+    });
+
     letterContainer.addEventListener('click', () => {
         if (!isOpened) {
             letterContainer.classList.add('opened');
             isOpened = true;
             
-            // Add floating hearts after opening
             setTimeout(() => {
                 createFloatingHearts();
             }, 1000);
