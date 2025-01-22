@@ -1,0 +1,288 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #2a0845 0%, #6441A5 50%, #2a0845 100%);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    overflow: hidden;
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: twinkle 4s infinite;
+    opacity: 0.7;
+}
+
+.container {
+    perspective: 2000px;
+    margin: 20px;
+}
+
+.letter-container {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.front {
+    background: linear-gradient(45deg, #9d50bb, #6e48aa);
+    transform: rotateY(0deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.back {
+    background: #8a2be2;
+    transform: rotateY(180deg);
+}
+
+.stamp {
+    font-size: 3em;
+    margin-bottom: 20px;
+    animation: float 3s infinite;
+}
+
+.name {
+    font-size: 1.5em;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.flip {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #9d50bb;
+    transform-origin: top;
+    transition: transform 0.6s;
+}
+
+.letter {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f8f8ff;
+    border-radius: 5px;
+    padding: 20px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s;
+    overflow-y: auto;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+}
+
+.letter-content {
+    text-align: center;
+}
+
+.image-wrapper {
+    width: 90%;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.memory-image {
+    width: 100%;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.memory-image:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    color: #483d8b;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #4b0082;
+}
+
+.memory-text, .farewell {
+    line-height: 1.6;
+    margin: 15px 0;
+    color: #4a4a4a;
+}
+
+.signature {
+    margin-top: 30px;
+    font-style: italic;
+    color: #483d8b;
+}
+
+.instructions {
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    margin-top: 20px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    opacity: 0.8;
+    animation: pulse 2s infinite;
+}
+
+/* Opened state */
+.letter-container.opened {
+    transform: rotateY(180deg);
+}
+
+.letter-container.opened .flip {
+    transform: rotateX(180deg);
+}
+
+.letter-container.opened .letter {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Add magical sparkles */
+.sparkles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(circle at 20% 80%, rgba(255,192,203,0.4) 0%, rgba(255,192,203,0) 40%);
+    filter: blur(3px);
+    mix-blend-mode: screen;
+    animation: sparkleMove 20s infinite linear;
+}
+
+/* Add northern lights effect */
+.aurora {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(45deg, 
+        rgba(255,182,193,0.1) 0%,
+        rgba(147,112,219,0.1) 20%,
+        rgba(138,43,226,0.1) 40%,
+        rgba(147,112,219,0.1) 60%,
+        rgba(255,182,193,0.1) 80%);
+    filter: blur(60px);
+    animation: auroraFlow 15s infinite alternate;
+}
+
+/* Add new animations */
+@keyframes sparkleMove {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100%) rotate(360deg); }
+}
+
+@keyframes auroraFlow {
+    0% { transform: translateX(-50%) translateY(-10%); }
+    100% { transform: translateX(50%) translateY(10%); }
+}
+
+/* Update floating hearts animation */
+.floating-heart {
+    position: absolute;
+    font-size: 20px;
+    pointer-events: none;
+    animation: floatUp 3s ease-in forwards;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Add fog effect */
+.fog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(to bottom,
+            rgba(15, 12, 41, 0.2),
+            rgba(48, 43, 99, 0.1),
+            rgba(36, 36, 62, 0.2));
+    filter: blur(8px);
+    pointer-events: none;
+    animation: fogMove 20s infinite alternate;
+}
+
+/* New animations */
+@keyframes fogMove {
+    0% { transform: translateX(-5%) translateY(-5%); }
+    100% { transform: translateX(5%) translateY(5%); }
+} 
